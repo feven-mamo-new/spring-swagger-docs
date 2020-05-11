@@ -3,6 +3,8 @@ package com.spring.swagger.springbootswaggerapi;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ import java.util.concurrent.ConcurrentHashMap;
 @RestController
 @RequestMapping("/api")
 public class AddressBookResource {
+
+    private final static Logger logger= LoggerFactory.getLogger(AddressBookResource.class);
 
     ConcurrentHashMap<String, Contact> contacts = new ConcurrentHashMap<>();
 
@@ -26,7 +30,8 @@ public class AddressBookResource {
 
     @GetMapping("/")
     public List<Contact> getAllContact(){
-       return new ArrayList<Contact>(contacts.values());
+        logger.trace("Get all contacts method called...");
+        return new ArrayList<Contact>(contacts.values());
     }
 
     @PostMapping("/")
